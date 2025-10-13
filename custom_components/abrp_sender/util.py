@@ -3,22 +3,29 @@ from __future__ import annotations
 import aiohttp
 import logging
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers import entity_registry as er
 from .const import ABRP_API_URL
 
 _LOGGER = logging.getLogger(__name__)
 
 
 async def get_gps_entities(hass: HomeAssistant) -> list[str]:
-    """Return entities that likely provide latitude/longitude data."""
-    entities = []
-    entity_reg = er.async_get(hass)
-    for entity in entity_reg.entities.values():
-        # device_trackers, or sensors with "latitude" in name
-        if entity.domain in ["device_tracker", "sensor"] and (
-            "lat" in entity.entity_id or "location" in entity.entity_id
+    """
+    Return entities that likely provide latitude/longitude data.
+
+    We inspect hass.states for entities with 'latitude' and 'longitude'
+    attributes (device_trackers, some sensors, trackers from integrations).
+    """
+    entities: list[str] = []
+    for state in hass.states.async_all():
+        attrs = state.attributes
+        # Accept entities that expose numeric latitude & longitude attributes
+        if (
+            isinstance(attrs.get("latitude"), (float, int))
+            and isinstance(attrs.get("longitude"), (float, int))
         ):
-            entities.append(entity.entity_id)
+            entities.append(state.entity_id)
+    # sort for consistent order in selector
+    entities.sort()
     return entities
 
 
