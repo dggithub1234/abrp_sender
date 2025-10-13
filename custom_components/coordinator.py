@@ -6,7 +6,7 @@ from datetime import timedelta
 from homeassistant.core import HomeAssistant
 from homeassistant.const import CONF_API_KEY, CONF_SCAN_INTERVAL
 from homeassistant.helpers.event import async_track_time_interval
-from .const import DOMAIN, DEFAULT_SCAN_INTERVAL, ABRP_API_URL
+from .const import DOMAIN, DEFAULT_SCAN_INTERVAL, ABRP_API_URL, CONF_ENABLED
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -16,6 +16,7 @@ class ABRPSenderCoordinator:
         self.hass = hass
         self.entry = entry
         self.api_key = entry.options.get(CONF_API_KEY, entry.data.get(CONF_API_KEY))
+        self.enabled = entry.options.get(CONF_ENABLED, entry.data.get(CONF_ENABLED, True))
         self.interval = timedelta(
             seconds=entry.options.get(CONF_SCAN_INTERVAL, entry.data.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL))
         )
@@ -34,6 +35,12 @@ class ABRPSenderCoordinator:
     async def _async_send_data(self, now):
         """Send sensor data to ABRP."""
         data = {**self.entry.data, **self.entry.options}
+        self.enabled = data.get(CONF_ENABLED, True)
+
+        if not self.enabled:
+            _LOGGER.debug("ABRP Sender disabled — skipping data upload.")
+            return
+
         payload = {"api_key": self.api_key}
 
         def get_value(entity_id):
