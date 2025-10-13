@@ -21,7 +21,7 @@ Send real-time car and GPS data from Home Assistant sensors to [A Better Routepl
 
 1. Go to **HACS → Integrations → Custom Repositories**  
 2. Add this repo URL:  
-https://github.com/yourname/ha-abrp-sender
+https://github.com/dggithub1234/abrp-sender
 
 markdown
 Copy code
@@ -56,4 +56,4 @@ You can edit these anytime using the **Options** menu in the integration setting
 
 ## 🧑‍💻 Credits
 
-Created by [Your Name](https://github.com/yourname)
+Created by [Daniel G](https://github.com/dggithub1234)
