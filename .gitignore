@@ -1,0 +1,49 @@
+# ----------------------------
+# Python build & cache files
+# ----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# ----------------------------
+# Home Assistant & HACS files
+# ----------------------------
+# Configuration and secrets
+/config/
+secrets.yaml
+*.db
+*.log
+home-assistant_v2.db
+*.storage/
+
+# Local HA environment files
+.homeassistant/
+custom_components/__pycache__/
+
+# HACS cache
+.hacs/
+.ha-cache/
+
+# ----------------------------
+# Development / IDE / tooling
+# ----------------------------
+# VSCode
+.vscode/
+# PyCharm / IntelliJ
+.idea/
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
+desktop.ini
+# Linu
