@@ -10,27 +10,20 @@ _LOGGER = logging.getLogger(__name__)
 
 async def get_gps_entities(hass: HomeAssistant) -> list[str]:
     """
-    Return entities that likely provide latitude/longitude data.
-
-    We inspect hass.states for entities with 'latitude' and 'longitude'
-    attributes (device_trackers, some sensors, trackers from integrations).
+    Return entities that provide latitude/longitude attributes.
+    Includes device_tracker and other entities with numeric lat/lon.
     """
     entities: list[str] = []
     for state in hass.states.async_all():
         attrs = state.attributes
-        # Accept entities that expose numeric latitude & longitude attributes
-        if (
-            isinstance(attrs.get("latitude"), (float, int))
-            and isinstance(attrs.get("longitude"), (float, int))
-        ):
+        if isinstance(attrs.get("latitude"), (float, int)) and isinstance(attrs.get("longitude"), (float, int)):
             entities.append(state.entity_id)
-    # sort for consistent order in selector
     entities.sort()
     return entities
 
 
 async def test_abrp_api_key(api_key: str) -> bool:
-    """Check if ABRP API key is valid by sending a small test payload."""
+    """Send a test payload to ABRP to validate API key."""
     payload = {"api_key": api_key, "soc": 50, "lat": 0, "lon": 0}
     try:
         async with aiohttp.ClientSession() as session:
