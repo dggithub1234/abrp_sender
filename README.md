@@ -25,7 +25,7 @@ Send live vehicle and GPS sensor data from Home Assistant to [A Better Routeplan
 1. Go to **HACS → Integrations → Custom Repositories**  
 2. Add this repository URL:
 
-https://github.com/yourname/ha-abrp-sender
+https://github.com/dggithub1234/abrp_sender
 
 yaml
 Copy code
