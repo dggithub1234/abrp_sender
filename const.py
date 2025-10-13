@@ -1,0 +1,2 @@
+DOMAIN = "abrp_sender"
+DEFAULT_SCAN_INTERVAL = 60
