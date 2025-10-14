@@ -73,12 +73,13 @@ class ABRPSenderCoordinator:
         tlm = {
             "utc": float(time.time()),
             "soc": get_value(data.get("soc_sensor")),
+    	    "range": get_value(data.get("range_sensor")),
+            "odometer": get_value(data.get("odometer_sensor")) or 0,
             "speed": get_value(data.get("speed_sensor")),
             "power": get_value(data.get("power_sensor")),
-            "odometer": get_value(data.get("odometer_sensor")) or 0,
             "lat": lat,
             "lon": lon,
-            "is_parked": False,  # optional, could be derived from movement sensor
+	    "car_temp": get_value(data.get("car_temp_sensor")),
         }
 
         # Remove None values
