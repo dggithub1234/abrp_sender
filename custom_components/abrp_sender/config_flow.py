@@ -29,12 +29,14 @@ class ABRPSenderConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 vol.Required(CONF_API_TOKEN): str,
                 vol.Optional(CONF_ENABLED, default=True): bool,
                 vol.Optional("soc_sensor"): selector.EntitySelector({"domain": "sensor"}),
-                vol.Optional("speed_sensor"): selector.EntitySelector({"domain": "sensor"}),
+		vol.Optional("range_sensor"): selector.EntitySelector({"domain": "sensor"}),
+                vol.Optional("odometer_sensor"): selector.EntitySelector({"domain": "sensor"}),
+		vol.Optional("speed_sensor"): selector.EntitySelector({"domain": "sensor"}),
+                vol.Optional("power_sensor"): selector.EntitySelector({"domain": "sensor"}),
                 vol.Optional("location_entity"): location_selector,
                 vol.Optional("latitude_sensor"): selector.EntitySelector({"domain": "sensor"}),
                 vol.Optional("longitude_sensor"): selector.EntitySelector({"domain": "sensor"}),
-                vol.Optional("power_sensor"): selector.EntitySelector({"domain": "sensor"}),
-                vol.Optional("odometer_sensor"): selector.EntitySelector({"domain": "sensor"}),
+		vol.Optional("car_temp_sensor"): selector.EntitySelector({"domain": "sensor"}),
                 vol.Optional(CONF_SCAN_INTERVAL, default=DEFAULT_SCAN_INTERVAL): vol.All(
                     int, vol.Range(min=10, max=600)
                 ),
