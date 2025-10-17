@@ -44,7 +44,7 @@ All configuration is handled through the Home Assistant UI — no YAML required.
 | **Estimated Range Sensor** | Battery estimated range sensor | *(optional)* |
 | **Speed Sensor** | Vehicle speed sensor | *(optional)* |
 | **Power Sensor** | Positive/negative power flow | *(optional)* |
-| **Latitude / Longitude Sensor** | Device tracker or GPS sensor | *(optional)* |
+| **Latitude / Longitude Sensor** | Device tracker sensor or GPS Lat and Long individual sensores | *(optional)* |
 | **External Temperature** | Vehicle temperature sensor | *(optional)* |
 | **Scan Interval (seconds)** | How often data is sent (10–600 s) | 60 s |
 
