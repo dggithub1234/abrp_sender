@@ -73,13 +73,13 @@ class ABRPSenderCoordinator:
         tlm = {
             "utc": float(time.time()),
             "soc": get_value(data.get("soc_sensor")),
-    	    "range": get_value(data.get("range_sensor")),
+    	    "est_battery_range": get_value(data.get("range_sensor")),
             "odometer": get_value(data.get("odometer_sensor")) or 0,
             "speed": get_value(data.get("speed_sensor")),
             "power": get_value(data.get("power_sensor")),
             "lat": lat,
             "lon": lon,
-	    "car_temp": get_value(data.get("car_temp_sensor")),
+	    	"ext_temp": get_value(data.get("car_temp_sensor")),
         }
 
         # Remove None values
@@ -101,3 +101,4 @@ class ABRPSenderCoordinator:
                         _LOGGER.debug("ABRP data sent successfully: %s", resp_text)
             except Exception as e:
                 _LOGGER.error("Error sending data to ABRP: %s", e)
+
